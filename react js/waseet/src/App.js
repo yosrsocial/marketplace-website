@@ -1,0 +1,35 @@
+import './App.css';
+import NavBar from './Components/NavBar/NavBar';
+import {AddListing} from './Pages/AddListing';
+import {Home} from './Pages/Home';
+import {Profile} from './Pages/Profile';
+import {Product} from './Pages/Product';
+import {Cart} from './Pages/Cart';
+import {Login} from './Pages/Login';
+import Footer from './Components/Footer/footer';
+
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { CheckoutPage } from './Pages/CheckoutPage';
+
+function App() {
+  return (
+    <div>
+      <BrowserRouter>
+      <NavBar/>
+      <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/Profile' element={<Profile/>}/>
+      <Route path='/AddListing' element={<AddListing/>}/>
+      <Route path='/Product' element={<Product/>}/>
+      <Route path="/product/:id" element={<Product />} />
+      <Route path= '/Cart' element={<Cart/>}/>
+      <Route path='/Login' element={<Login/>}/>
+      <Route path='/Checkout' element={<CheckoutPage/>}/>
+      </Routes>
+      <Footer/>
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
