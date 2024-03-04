@@ -11,8 +11,6 @@ class userprofile(AbstractUser):
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True)
     city = models.CharField(max_length=100, blank=True, null=True)
     zip_code = models.CharField(max_length=20, blank=True, null=True)
-    seller_rating = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-    buyer_rating = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     account_verified = models.BooleanField(default=False)
     preferred_payment_methods = models.TextField(blank=True, null=True)
     preferred_delivery_methods = models.TextField(blank=True, null=True)
@@ -72,11 +70,13 @@ class orders(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
 
+
 class orderItem(models.Model):
     order = models.ForeignKey(orders, on_delete=models.CASCADE)
     product = models.ForeignKey(products, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     item_price = models.DecimalField(max_digits=10, decimal_places=2)
+
 
 class transactions(models.Model):
     order = models.OneToOneField(orders, on_delete=models.CASCADE)

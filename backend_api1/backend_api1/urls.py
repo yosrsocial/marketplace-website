@@ -13,12 +13,25 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+
+
+tokens: 
+http post http://127.0.0.1:8000/api/token/ username=python password=allan123
+
+request: 
+http http://127.0.0.1:8000/api/users/ "Authorization: Bearer -paste token here-"
 """
 from django.contrib import admin
 from django.urls import path , include 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('main.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api-auth/', include('rest_framework.urls')),
 ]
