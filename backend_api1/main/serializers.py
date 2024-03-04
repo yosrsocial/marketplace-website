@@ -19,13 +19,15 @@ class userdetailserializer(serializers.ModelSerializer):
         
 class productserializer(serializers.ModelSerializer):
     class Meta:
+        productrating = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
         model= models.products
         fields= [
-            'id','title', 'seller'
+            'id','title','price', 'image', 'seller', 'productrating'
                  ]
 
 class productdetailserializer(serializers.ModelSerializer):
     class Meta:
+        productrating = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
         model= models.products
         fields= [
             'id','title', 'description', 'price', 'category', 'seller', 'quantity', 'size', 'color', 'is_sold', 'created_at'
