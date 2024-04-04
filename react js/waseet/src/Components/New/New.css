@@ -1,5 +1,5 @@
 
-.new-item{
+.new-item1{
     margin: 80px 20px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));

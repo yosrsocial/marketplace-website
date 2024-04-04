@@ -18,7 +18,7 @@ const NavBar = () => {
           <Link to = '/'><img src={logoImage} alt="waseet" /></Link>
         </nav>
       <nav className="logo-name">
-        <p>Waseet</p>
+        <p>Bi3ly</p>
       </nav>
       </nav>
       <nav className="search">

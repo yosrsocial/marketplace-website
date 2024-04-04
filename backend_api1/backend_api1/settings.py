@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-#g%*yupq8myliw76f3&(tmp8t!r1hhxktp=oj==bu+n4zkf@#&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["http://localhost:3000", "127.0.0.1"]
 
 
 # Application definition
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'main',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+MEDIA_URL= '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React development server
+    # Add other allowed origins as needed
 ]
 
 ROOT_URLCONF = 'backend_api1.urls'
@@ -132,9 +144,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'main.userprofile'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+    #'DEFAULT_PERMISSION_CLASSES': [
+    #    'rest_framework.permissions.IsAuthenticated',
+    #],
 
     #'DEFAULT_AUTHENTICATION_CLASSES': [
     #    'rest_framework_simplejwt.authentication.JWTAuthentication',

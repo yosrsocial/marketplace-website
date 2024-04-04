@@ -2,19 +2,30 @@ import React from 'react'
 import './Item.css'
 import { Link } from 'react-router-dom';
 
+//<img onClick={window.scrollTo(0,0)} src={props.product_images} alt="" />
+
+
+/*{props.productImages.map((imageUrl, index) => (
+          <img 
+            key={index} // Make sure to provide a unique key for each image
+            onClick={() => window.scrollTo(0, 0)} // You can pass a function directly to onClick
+            src={imageUrl} 
+            alt={`Image ${index}`} // Provide a descriptive alt text for accessibility
+          />
+        ))}*/
 export const Item = (props) => {
   return (
 
     <div className= 'item'>
-        <Link to={`/product/${props.id}`}><img onClick={window.scrollTo(0,0)} src={props.image} alt="" /></Link>
-        <p>{props.name}</p>
+        <Link to={`/product/${props.id}`}>{props.product_images.map((image_url, index)=> (index === 0 && (<img className='item-img' key={index} src={image_url} onClick={() => window.scrollTo(0, 0)}/>)))}</Link>
+        <p>{props.title}</p>
         <div className="item-prices">
             <div className="item-price-new">
-                DA {props.new_price}
+                {props.price} DA
             </div>
-            <div className="item-prices-old">
-                DA {props.old_price}
-            </div>
+        </div>
+        <div className='seller'>
+              {props.seller}
         </div>
     </div>
   )

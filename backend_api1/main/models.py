@@ -25,6 +25,7 @@ class userprofile(AbstractUser):
 class productcategory(models.Model):
     title= models.CharField(max_length=200)
     
+    
     def __str__(self):
         return self.title
     
@@ -33,7 +34,6 @@ class products(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='product_images/', default="")
     category = models.ForeignKey(productcategory, on_delete=models.SET_NULL, null=True)
     seller = models.ForeignKey(userprofile, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
@@ -52,6 +52,10 @@ class products(models.Model):
         if ratings:
             return sum(rating.rating_value for rating in ratings) / len(ratings)
         return 0 
+
+class productimages(models.Model):
+    image = models.ImageField(upload_to='product_images/', null=True, blank=True)
+    product = models.ForeignKey(products, on_delete=models.SET_NULL, null=True, related_name= 'product_images')
 
 
 class saved(models.Model):

@@ -6,10 +6,11 @@
 
 .item p{
     margin: 6px 0px;
+    font-weight: 500;
 
 }
 
-.item img{
+.item-img {
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -21,12 +22,14 @@
 .item-prices {
     display: flex;
     gap: 20 px;
+    color:#374151;
+    font-weight: 500;
 }
 
 .item-prices-new{
     color: #374151;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
     gap: 20 px;
 }
 
@@ -37,6 +40,10 @@
     text-decoration: line-through;
     margin-left: 10px;
     gap: 20 px;
+}
+
+.seller{
+    font-weight: 500;
 }
 
 .item:hover{
