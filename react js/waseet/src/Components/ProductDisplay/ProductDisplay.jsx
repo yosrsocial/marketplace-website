@@ -4,7 +4,7 @@ import { ShopContext } from '../../Context/ShopContext';
 
 export const ProductDisplay = (props) => {
     const {product} = props;
-    const {addToCart, removeFromCart, cartButtononClickStatus} = useContext(ShopContext);
+    const {addToCart, removeFromCart, cartButtonReset} = useContext(ShopContext);
     return (
         <div className='productdisplay'>
             <div className="productdisplay-left">
@@ -40,8 +40,8 @@ export const ProductDisplay = (props) => {
                 <div className="productcategory">
                     {product.category}
                 </div>
-                {!cartButtononClickStatus && <button onClick={()=>{addToCart(product.id)}} className='add-to-cart-btn'>ADD TO CART</button>}
-                {cartButtononClickStatus && <button onClick={()=>{removeFromCart(product.id)}} className='remove-from-cart-btn'>REMOVE FROM CART</button>}
+                        {cartButtonReset(product.id) === false && <button onClick={()=>{addToCart(product.id)}} className='add-to-cart-btn'>ADD TO CART</button>}
+                        {cartButtonReset(product.id) === true && <button onClick={()=>{removeFromCart(product.id)}} className='remove-from-cart-btn'>REMOVE FROM CART</button>}
             </div>
         </div>
     )

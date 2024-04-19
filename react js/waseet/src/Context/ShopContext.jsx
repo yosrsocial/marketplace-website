@@ -10,10 +10,27 @@ const ShopContextProvider = (props) => {
     const [cartItems, setCartItems] = useState();
     const [cartButtononClickStatus, setCartButtononClickStatus] = useState(false);
 
+    const cartButtonReset = (itemId) => {
+        if(cartButtononClickStatus && cartItems[itemId] == 0){
+            setCartButtononClickStatus(false)
+            console.log('cartitem false:', cartItems[itemId])
+            return false // false means 'add to cart'
+        }else if(!cartButtononClickStatus && cartItems[itemId] == 0){
+            console.log('cartitem false:', cartItems[itemId])
+            return false // add to cart
+        }else if(!cartButtononClickStatus && cartItems[itemId] != 0){
+            setCartButtononClickStatus(true)
+            console.log('cartitem true:', cartItems[itemId])
+            return true //remove from cart
+        }else if(cartButtononClickStatus && cartItems[itemId] != 0){
+            console.log('cartitem false:', cartItems[itemId])
+            return true // remove from cart
+        }
+    }
 
     const addToCart = (itemId)=> {
         setCartButtononClickStatus(true);
-
+/*
         let itemInfo = data.find((product) => product.id === itemId);
 
     const cartData = {
@@ -38,7 +55,7 @@ const ShopContextProvider = (props) => {
         newCartList.push(cartData)
         var cartString = JSON.stringify(newCartList)
         localStorage.setItem('cartData', cartString)
-    }
+    }*/
 
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
 
@@ -58,11 +75,11 @@ const ShopContextProvider = (props) => {
                     setCartItems(defaultCart);
                 })
                 .catch(error => console.error('Error fetching data:', error));
-        
     }, [] )
 
     const removeFromCart = (itemId)=> {
         setCartButtononClickStatus(false);
+        /*
         try {
             const existingCartData = localStorage.getItem('cartData');
             let cartJSON = JSON.parse(existingCartData);
@@ -71,7 +88,7 @@ const ShopContextProvider = (props) => {
         } catch(error) {
             console.error('Error removing item from cart:', error);
         }
-
+*/
         setCartItems((prev) => ({...prev,[itemId]:prev[itemId]-1}))
     }
 
@@ -102,7 +119,7 @@ const ShopContextProvider = (props) => {
     }
     
 
-    const contextValue = {data, cartItems, cartButtononClickStatus, getTotalCartAmount, getTotalCartItems, addToCart, removeFromCart,};
+    const contextValue = {data, cartItems, cartButtononClickStatus, cartButtonReset, getTotalCartAmount, getTotalCartItems, addToCart, removeFromCart,};
     return ( 
         <ShopContext.Provider value={contextValue}>
             {props.children}
