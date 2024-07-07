@@ -72,3 +72,8 @@
     font-size: 18px;
     font-weight: 500;
 }
+
+.error-message{
+    color: red;
+    font-size: 11px;
+}

@@ -1,6 +1,7 @@
 import React, { createContext } from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
+import api from '../Components/api-requests'
 
 export const ShopContext = createContext(null);
 
@@ -62,20 +63,23 @@ const ShopContextProvider = (props) => {
     }
     
     useEffect(() => {
-            // Fetch data from your API endpoint
-            fetch('http://127.0.0.1:8000/api/products/')
-                .then(response => response.json())
-                .then(data => {
-                    setData(data);
-                    // Initialize cart items based on fetched data
-                    const defaultCart = {};
-                    data.forEach(item => {
-                    defaultCart[item.id] = 0;
-                    });
-                    setCartItems(defaultCart);
-                })
-                .catch(error => console.error('Error fetching data:', error));
-    }, [] )
+        // Fetch data from API endpoint
+        const fetchData = async () => {
+            try {
+            const response = await api.get('/products/');
+            setData(response.data);
+            // Initialize cart items based on fetched data
+            const defaultCart = {};
+            response.data.forEach(item => {
+                defaultCart[item.id] = 0;
+            });
+            setCartItems(defaultCart);
+            } catch (error) {  // Corrected: Use parenthesis around error
+            console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+        }, []);
 
     const removeFromCart = (itemId)=> {
         setCartButtononClickStatus(false);
