@@ -1,6 +1,6 @@
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
-import {AddListing} from './Pages/AddListing';
+import SellItem from './Components/Sell/sell.jsx'
 import {Home} from './Pages/Home';
 import {Profile} from './Pages/Profile';
 import {Product} from './Pages/Product';
@@ -15,11 +15,13 @@ function App() {
   return (
     <div>
       <BrowserRouter>
+      <div className='content'>
       <NavBar/>
+      </div>
       <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/Profile' element={<Profile/>}/>
-      <Route path='/AddListing' element={<AddListing/>}/>
+      <Route path='/AddListing' element={<SellItem/>}/>
       <Route path='/Product' element={<Product/>}/>
       <Route path="/product/:id" element={<Product />} />
       <Route path= '/Cart' element={<Cart/>}/>

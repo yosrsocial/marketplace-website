@@ -1,6 +1,7 @@
 import React, { createContext } from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
+import api from '../Components/api-requests'
 
 export const ShopContext = createContext(null);
 
@@ -10,10 +11,27 @@ const ShopContextProvider = (props) => {
     const [cartItems, setCartItems] = useState();
     const [cartButtononClickStatus, setCartButtononClickStatus] = useState(false);
 
+    const cartButtonReset = (itemId) => {
+        if(cartButtononClickStatus && cartItems[itemId] == 0){
+            setCartButtononClickStatus(false)
+            console.log('cartitem false:', cartItems[itemId])
+            return false // false means 'add to cart'
+        }else if(!cartButtononClickStatus && cartItems[itemId] == 0){
+            console.log('cartitem false:', cartItems[itemId])
+            return false // add to cart
+        }else if(!cartButtononClickStatus && cartItems[itemId] != 0){
+            setCartButtononClickStatus(true)
+            console.log('cartitem true:', cartItems[itemId])
+            return true //remove from cart
+        }else if(cartButtononClickStatus && cartItems[itemId] != 0){
+            console.log('cartitem false:', cartItems[itemId])
+            return true // remove from cart
+        }
+    }
 
     const addToCart = (itemId)=> {
         setCartButtononClickStatus(true);
-
+/*
         let itemInfo = data.find((product) => product.id === itemId);
 
     const cartData = {
@@ -38,31 +56,34 @@ const ShopContextProvider = (props) => {
         newCartList.push(cartData)
         var cartString = JSON.stringify(newCartList)
         localStorage.setItem('cartData', cartString)
-    }
+    }*/
 
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
 
     }
     
     useEffect(() => {
-            // Fetch data from your API endpoint
-            fetch('http://127.0.0.1:8000/api/products/')
-                .then(response => response.json())
-                .then(data => {
-                    setData(data);
-                    // Initialize cart items based on fetched data
-                    const defaultCart = {};
-                    data.forEach(item => {
-                    defaultCart[item.id] = 0;
-                    });
-                    setCartItems(defaultCart);
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        
-    }, [] )
+        // Fetch data from API endpoint
+        const fetchData = async () => {
+            try {
+            const response = await api.get('/products/');
+            setData(response.data);
+            // Initialize cart items based on fetched data
+            const defaultCart = {};
+            response.data.forEach(item => {
+                defaultCart[item.id] = 0;
+            });
+            setCartItems(defaultCart);
+            } catch (error) {  // Corrected: Use parenthesis around error
+            console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+        }, []);
 
     const removeFromCart = (itemId)=> {
         setCartButtononClickStatus(false);
+        /*
         try {
             const existingCartData = localStorage.getItem('cartData');
             let cartJSON = JSON.parse(existingCartData);
@@ -71,7 +92,7 @@ const ShopContextProvider = (props) => {
         } catch(error) {
             console.error('Error removing item from cart:', error);
         }
-
+*/
         setCartItems((prev) => ({...prev,[itemId]:prev[itemId]-1}))
     }
 
@@ -102,7 +123,7 @@ const ShopContextProvider = (props) => {
     }
     
 
-    const contextValue = {data, cartItems, cartButtononClickStatus, getTotalCartAmount, getTotalCartItems, addToCart, removeFromCart,};
+    const contextValue = {data, cartItems, cartButtononClickStatus, cartButtonReset, getTotalCartAmount, getTotalCartItems, addToCart, removeFromCart,};
     return ( 
         <ShopContext.Provider value={contextValue}>
             {props.children}

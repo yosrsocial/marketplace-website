@@ -3,7 +3,7 @@ import { New } from '../Components/New/New.jsx'
 
 export const Home = () => {
   return (
-    <div>
+    <div className='content-wrap'>
       <New/>
     </div>
   )
