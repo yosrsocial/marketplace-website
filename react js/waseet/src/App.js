@@ -1,5 +1,6 @@
 import './App.css';
 import NavBar from './Components/NavBar/NavBar';
+import { ProfileBar } from './Components/ProfileBar/ProfileBar.jsx';
 import SellItem from './Components/Sell/sell.jsx'
 import {Home} from './Pages/Home';
 import {Profile} from './Pages/Profile';
@@ -17,6 +18,7 @@ function App() {
       <BrowserRouter>
       <div className='content'>
       <NavBar/>
+
       </div>
       <Routes>
       <Route path='/' element={<Home/>}/>

@@ -19,7 +19,6 @@ export const New = () => {
           const response = await api.get('/products/');
           //console.log('response:', response)
           setData(response.data);
-          console.log('data:', data)
         } catch (error) {
           console.error(error); // Handle errors
         }

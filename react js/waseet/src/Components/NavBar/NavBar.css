@@ -3,9 +3,13 @@
 }
 
 .top{
-  position: absolute;
-  background-color: #23292e;
+  position: fixed;
+  margin-bottom: 100px;
+  background-color: #fff;
+}
 
+.search{
+  background-color: #23292e;
 }
 
 .sidebar{
