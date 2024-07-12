@@ -3,14 +3,12 @@
 }
 
 .top{
+  right:250px;
   position: fixed;
   margin-bottom: 100px;
   background-color: #fff;
 }
 
-.search{
-  background-color: #23292e;
-}
 
 .sidebar{
 position: fixed;
@@ -48,6 +46,7 @@ width:90px;
   display: flex;
   background-color: #23292e;
   margin-left: 650px;
+  margin-right: 270px;
   padding: 5px 5px;
   border: 2px solid #23292e;
   border-radius: 30px;
