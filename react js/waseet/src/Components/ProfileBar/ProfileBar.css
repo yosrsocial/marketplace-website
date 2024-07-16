@@ -1,12 +1,13 @@
 .profilebar{
     position: fixed;
     display: inline;
-    background-color: #23292e;
+    background-color: #fff;
     height: 100%;
     padding: 5px;
     top: 0;
     right: 0;
     width:250px;
+    border-left: solid 2px #fafafa;
 }
 
 .profile-picture img{
