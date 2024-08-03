@@ -10,7 +10,7 @@ import './CSS/Product.css'
 export const Product = () => {
   const {data}= useContext(ShopContext)
   const {id} = useParams()
-  const product = data.find((element) => element.id === +id);
+  const product = data.find((item) => item.id === +id);
 
   return (
       <div>
