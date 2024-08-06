@@ -17,4 +17,5 @@ urlpatterns = [
     path('transactions/', views.transactionlist.as_view(), name='transactions'),    
     path('notifications/', views.notificationlist.as_view(), name='notifications'),    
     path('ratings/', views.ratingslist.as_view(), name='ratings'),
+    path('create-checkout-session/', views.CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
 ]

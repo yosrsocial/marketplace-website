@@ -18,6 +18,30 @@ import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+class CreateCheckoutSessionView(APIView):
+    #from chatgpt
+    def post(self, request, *args, **kwargs):
+            MY_DOMAIN = "http://localhost:8000"
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[
+                    {
+                        'price_data': {
+                            'currency': 'usd',
+                            'product': 'your-product-id',
+                            'unit_amount': 2000,  # amount in cents
+                        },
+                        'quantity': 1,
+                    },
+                ],
+                mode='payment',
+                success_url=MY_DOMAIN + '/success/',
+                cancel_url=MY_DOMAIN + '/cancel/',
+            )
+            return JsonResponse({
+                'id': checkout_session.id
+            })
+
 
 product_view_logger = logging.getLogger(__name__)
 
