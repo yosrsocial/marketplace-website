@@ -28,6 +28,11 @@ SECRET_KEY = 'django-insecure-#g%*yupq8myliw76f3&(tmp8t!r1hhxktp=oj==bu+n4zkf@#&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Stripe Keys: keep secret key secret!
+STRIPE_SECRET_KEY = 'your-stripe-secret-key'
+STRIPE_PUBLISHABLE_KEY = 'your-stripe-publishable-key'
+
+
 
 LOGGING = {
     "version": 1,

@@ -13,6 +13,12 @@ from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import logging
+from django.conf import settings
+import stripe
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
 product_view_logger = logging.getLogger(__name__)
 
 class UserListView(generics.ListCreateAPIView):
