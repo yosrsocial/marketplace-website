@@ -1,34 +1,75 @@
 from rest_framework import generics, permissions
+from rest_framework.views import APIView
+from rest_framework import viewsets
 from . import serializers
 from . import models
 from rest_framework.response import Response
 from rest_framework import status
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import logging
+product_view_logger = logging.getLogger(__name__)
 
-class userlist(generics.ListCreateAPIView):
-    queryset= models.userprofile.objects.all()
+class UserListView(generics.ListCreateAPIView):
+    queryset = User.objects.all()
     serializer_class = serializers.userserializer
-    permission_classes = [permissions.IsAuthenticated]
 
-class userdetails(generics.RetrieveUpdateDestroyAPIView):
-    queryset= models.userprofile.objects.all()
-    serializer_class = serializers.userdetailserializer
-    permission_classes = [permissions.IsAuthenticated]
+class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = serializers.userserializer
+
+@method_decorator(csrf_exempt, name='dispatch')
+class UserLoginView(APIView):
+    def post(self, request):
+        try:
+            # Use request.data to get POST data from a JSON body
+            username = request.data.get('username')
+            password = request.data.get('password')
+
+            if not username or not password:
+                return Response({"error": "Username and password are required"}, status=400)
+            user = authenticate(username=username, password=password)
+
+            if user:
+                refresh = RefreshToken.for_user(user)
+                return JsonResponse({
+                    "status": "success", 
+                    "message": "Logged in!",
+                    'username': user.username,
+                    'access': str(refresh.access_token),
+                    'refresh': str(refresh),})
+            else:
+                return JsonResponse({"status": "error", "message": "Invalid credentials"}, status=401)
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+
 
 class productlist(generics.ListCreateAPIView):
     queryset= models.products.objects.all()
     serializer_class = serializers.ProductRetrieveSerializer
-    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
 class productimages(generics.ListCreateAPIView):
     queryset= models.productimages.objects.all()
-    serializer_class = serializers.ProductImageSerializer
+    serializer_class = serializers.ProductImageDetailSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+class CreateProductImageAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = serializers.ProductImageCreateSerializer(data=request.data)
 
 
 class productdetails(generics.RetrieveUpdateDestroyAPIView):
     queryset= models.products.objects.all()
     serializer_class = serializers.ProductRetrieveSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    #permission_classes = [permissions.IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -39,32 +80,32 @@ class productdetails(generics.RetrieveUpdateDestroyAPIView):
         for item in data:
             product_id = item['id']
             images = models.productimages.objects.filter(product__id=product_id)
-            image_serializer = serializers.ProductImageSerializer(images, many=True)
+            image_serializer = serializers.ProductImageDetailSerializer(images, many=True)
             item['images'] = image_serializer.data
 
         return Response(data)
 
-class productcreate(generics.CreateAPIView):
-    serializer_class = serializers.notificationserializer
-    '''
-    @transaction.atomic
-    def post(self, request, format=None):
-        images = request.data.get('images', [])
-        request.data.pop('images')
-        serialized_data = self.serializer(data=request.data)
-        product_obj = None
-        if serialized_data.is_valid():
-            product_obj=Product.objects.create(**serialized_data.validated_data)
-        if product_obj and len(images) > 0:
-            for image_data in images:
-                image_data['product_id'] = str(product_obj._id)
-                product_image_serialized_data = ProductImageSerializer(data=image_data)
-        if product_image_serialized_data.is_valid(raise_exception=True):
-            product_image_obj = ProductImage.objects.create(**product_image_serialized_data.validated_data)
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = models.products.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
 
-    # Write your necessary code if needed
-        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
-        '''
+    def get_serializer_class(self):
+        if self.action in ['create', 'update', 'partial_update']:
+            return serializers.productcreationserializer
+        return serializers.ProductRetrieveSerializer
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        
+        serializer.is_valid(raise_exception=True)
+        product = serializer.save()
+    # Handle uploaded images
+        product_images = request.FILES.getlist('product_images')
+        #product_view_logger.debug("Uploaded Images: %s", request.FILES.getlist('product_images'))
+        for image in product_images:
+            product_images = models.productimages(product=product, image=image)
+            product_images.save()
+
+        return Response(serializer.data)
 
 class productcategories(generics.ListCreateAPIView):
     queryset= models.productcategory.objects.all()
@@ -95,3 +136,25 @@ class ratingslist(generics.ListCreateAPIView):
     queryset= models.ratings.objects.all()
     serializer_class = serializers.ratingserializer
     permission_classes = [permissions.IsAuthenticated]
+
+'''
+class productcreate(generics.CreateAPIView):
+    serializer_class = serializers.notificationserializer
+    @transaction.atomic
+    def post(self, request, format=None):
+        images = request.data.get('images', [])
+        request.data.pop('images')
+        serialized_data = self.serializer(data=request.data)
+        product_obj = None
+        if serialized_data.is_valid():
+            product_obj=Product.objects.create(**serialized_data.validated_data)
+        if product_obj and len(images) > 0:
+            for image_data in images:
+                image_data['product_id'] = str(product_obj._id)
+                product_image_serialized_data = ProductImageSerializer(data=image_data)
+        if product_image_serialized_data.is_valid(raise_exception=True):
+            product_image_obj = ProductImage.objects.create(**product_image_serialized_data.validated_data)
+
+    # Write your necessary code if needed
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+'''

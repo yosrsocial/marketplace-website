@@ -13,16 +13,28 @@ import { Link } from 'react-router-dom';
             alt={`Image ${index}`} // Provide a descriptive alt text for accessibility
           />
         ))}*/
+
+
+/*
+{props.product_images.map((image_url, index)=> (index === 0 && (<img className='item-img' key={index} src={image_url} onClick={() => window.scrollTo(0, 0)}/>)))}
+*/
+
 export const Item = (props) => {
   return (
 
     <div className= 'item'>
-        <Link to={`/product/${props.id}`}>{props.product_images.map((image_url, index)=> (index === 0 && (<img className='item-img' key={index} src={image_url} onClick={() => window.scrollTo(0, 0)}/>)))}</Link>
-        <p>{props.title}</p>
-        <div className="item-prices">
-            <div className="item-price-new">
-                {props.price} DA
-            </div>
+        <div className="image">
+        <Link to={`/product/${props.id}`}>{props.product_images.length > 0 && ( 
+          <img className="item-img" key={0} src={props.product_images[0].image_url} onClick={() => window.scrollTo(0, 0)} />)}
+        </Link>
+        </div>
+        <div className="titlenprice">
+          <p>{props.title}</p>
+          <div className="item-prices">
+              <div className="item-price-new">
+                  {props.price} DA
+              </div>
+          </div>
         </div>
         <div className='seller'>
               {props.seller}

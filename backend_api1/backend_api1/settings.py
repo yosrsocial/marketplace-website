@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,6 +27,28 @@ SECRET_KEY = 'django-insecure-#g%*yupq8myliw76f3&(tmp8t!r1hhxktp=oj==bu+n4zkf@#&
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "logs", "debug1.log"),
+        },
+    },
+    "loggers": {
+    'product_view_logger': {
+        'handlers': ['file'],
+        'level': 'DEBUG',  
+        'propagate': False,
+    },
+}
+}
+
+
 
 ALLOWED_HOSTS = ["http://localhost:3000", "127.0.0.1"]
 
@@ -58,6 +82,8 @@ MIDDLEWARE = [
 MEDIA_URL= '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# STATIC_URL = '/static/'
+# STATIC_ROOT = 
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React development server
@@ -91,10 +117,11 @@ DATABASES = {
     'default': {
 
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Marketplace',
+        'NAME': 'marketplace2',
         'USER': 'postgres',
         'PASSWORD': 'codealexis113',
         'HOST': 'localhost',
+        
     }
 }
 
@@ -141,14 +168,18 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTH_USER_MODEL = 'main.userprofile'
-
+AUTH_USER_MODEL = 'auth.User'
 REST_FRAMEWORK = {
-    #'DEFAULT_PERMISSION_CLASSES': [
-    #    'rest_framework.permissions.IsAuthenticated',
-    #],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 
-    #'DEFAULT_AUTHENTICATION_CLASSES': [
-    #    'rest_framework_simplejwt.authentication.JWTAuthentication',
-    #],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }

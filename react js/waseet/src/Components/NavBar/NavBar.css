@@ -1,23 +1,31 @@
 .navbar{
-  box-sizing: border-box;
-  height: 70px;
-  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background:#23292e;
-  margin: 0px;
-  padding: 0px 4%;
+}
+
+.top{
+  right:250px;
+  position: fixed;
+  margin-bottom: 200px;
+  background-color: #fff;
 }
 
 
+.sidebar{
+position: fixed;
+background-color: #fff;
+border-right: solid 2px #fafafa;;
+height: 100%;
+padding: 10px;
+width:90px;
+}
+
 .nav-logo {
-  display: flex;
-  align-items: center;
   color: white;
   text-decoration: none;
-  gap: 20px;
   font-size: 20px;
+  padding: 5px;
+  margin-top: 0px;
+  margin-bottom: 30px;
 }
 
 .logo-name{
@@ -30,15 +38,20 @@
 }
 
 .nav-logo img{
-  height: 5%;
+  margin-top: 0px;
+  height: 10%;
+  margin-bottom: 70px;
 }
 
 .search{
-  display:flex;
   height: 50px;
   margin: 10px;
+  display: flex;
+  background-color: #eeeeee;
+  margin-left: 650px;
+  margin-right: 270px;
   padding: 5px 5px;
-  border: 2px solid #fff;
+  border: 2px solid #eeeeee;
   border-radius: 30px;
   width: 400px;
 }
@@ -46,22 +59,25 @@
 .search input{
   border: none;
   outline: none;
-  background: transparent;
   text-decoration: none;
+  background-color: #eeeeee;
   font-size: 16px;
-  color: #fff;
+  color: #414141;
   padding: 10px;
 }
 
 .search img{
   height: 20px;
   margin: 10px;
+  background-color: #eeeeee
 }
 
 .action-buttons{
-  display: flex;
-  align-items: center;
-  text-decoration: none;
+  margin-left: 20px;
+}
+
+.home-button{
+  margin-bottom: 50px;
 }
 
 .sell-button {
@@ -71,30 +87,11 @@
   border: none;
   outline: none;
   padding: 0;
-  margin-right:20px;;
+  margin-bottom: 50px;
   background: transparent;
   cursor: pointer;
 }
 
-.sell-button a{
-  padding: 10px 30px;
-  text-decoration: none;
-  color: #fff;  
-  background-color: rgba(5, 73, 124, 0.7);
-  border: 2px solid white;
-  border-radius: 30px;
-  border-color: transparent;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  @media (max-width: 600px) {
-    font-size: 14px;
-    padding: 8px 16px
-  }
-}
-
-.sell-button :hover{
-  background-color: rgba(5, 73, 124, 0.3);
-}
 
 .login-button {
   appearance: none;
@@ -103,48 +100,33 @@
   border: none;
   outline: none;
   padding: 0;
-  margin:0;
+  margin-bottom: 40px;
   background: none;
   cursor: pointer;
 }
 
 .login-button a{
-  padding: 10px 30px;
-  text-decoration: none;
-  color: #fff;  
-  background-color: transparent;
-  border: 2px solid white;
-  border-radius: 30px;
-  border-color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   @media (max-width: 600px) {
     font-size: 14px;
     padding: 8px 16px
   }
 }
 
-.login-button :hover{
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
 .cart-button {
-  margin-left: 20px;
-  padding: 10px 20px;
   border: none;
   cursor: pointer;
+  margin-bottom: 20px;
+  display: inline;
 }
 
 .nav-cart-count {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: -35px;
-  margin-left: -30px;
+  width: 15px;
+  height: 18px;
+  margin-left: 18px;
   border-radius: 11px;
-  font-size: 14px;
-  background-color: red;
+  font-size: 12px;
+  text-align: center;
+  background-color: rgb(219, 103, 103);
   color: white;
 }

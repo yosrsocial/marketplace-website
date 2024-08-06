@@ -1,0 +1,17 @@
+.profilebar{
+    position: fixed;
+    display: inline;
+    background-color: #fff;
+    height: 100%;
+    padding: 5px;
+    top: 0;
+    right: 0;
+    width:250px;
+    border-left: solid 2px #fafafa;
+}
+
+.profile-picture img{
+    margin: 20px;
+    height: 40px;
+    border-radius: 20px;
+}
