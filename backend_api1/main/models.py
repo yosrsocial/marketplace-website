@@ -2,9 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # User models    
-class Profile(models.Model):
+class Seller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     stripe_account_id = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
 
 class productcategory(models.Model):
     title= models.CharField(max_length=200)

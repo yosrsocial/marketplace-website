@@ -15,32 +15,75 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 import logging
 from django.conf import settings
 import stripe
+import json
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-class CreateCheckoutSessionView(APIView):
-    #from chatgpt
+class CreateConnectedAccountView(APIView):
     def post(self, request, *args, **kwargs):
-            MY_DOMAIN = "http://localhost:8000"
-            checkout_session = stripe.checkout.Session.create(
-                payment_method_types=['card'],
-                line_items=[
-                    {
-                        'price_data': {
-                            'currency': 'usd',
-                            'product': 'your-product-id',
-                            'unit_amount': 2000,  # amount in cents
-                        },
-                        'quantity': 1,
-                    },
-                ],
-                mode='payment',
-                success_url=MY_DOMAIN + '/success/',
-                cancel_url=MY_DOMAIN + '/cancel/',
+        try:
+            account = stripe.Account.create(
+                type='express',
             )
-            return JsonResponse({
-                'id': checkout_session.id
-            })
+            # Store the account.id in database associated with the seller
+            seller = request.user.Seller
+            seller.stripe_account_id = account.id
+            seller.save()
+
+            return JsonResponse({'account_id': account.id})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+
+class CreatePaymentIntentView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body)
+        amount = data.get('amount')
+        currency = data.get('currency', 'usd')
+        payment_method = data.get('payment_method')
+        seller_id = data.get('seller_id')  # Assuming the frontend sends the seller's ID
+
+        try:
+            # Fetch the seller's Stripe account ID
+            seller = models.Seller.objects.get(id=seller_id)
+            stripe_account_id = seller.stripe_account_id
+
+            # Create the PaymentIntent
+            payment_intent = stripe.PaymentIntent.create(
+                amount=amount,
+                currency=currency,
+                payment_method=payment_method,
+                confirmation_method='manual',
+                confirm=True,
+                transfer_data={
+                    'destination': stripe_account_id,  # Seller's Stripe account ID
+                },
+                capture_method='manual',  # Optional: Capture the payment later
+            )
+
+            return JsonResponse({'client_secret': payment_intent['client_secret']})
+
+        except models.Seller.DoesNotExist:
+            return JsonResponse({'error': 'Seller not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+
+
+class CapturePaymentView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body)
+        payment_intent_id = data.get('payment_intent_id')
+
+        try:
+            # Capture the payment
+            payment_intent = stripe.PaymentIntent.capture(
+                payment_intent_id
+            )
+
+            return JsonResponse({'status': payment_intent['status']})
+
+        except stripe.error.StripeError as e:
+            return JsonResponse({'error': str(e)}, status=400)
+        
 
 
 product_view_logger = logging.getLogger(__name__)
