@@ -18,5 +18,6 @@ urlpatterns = [
     path('notifications/', views.notificationlist.as_view(), name='notifications'),    
     path('ratings/', views.ratingslist.as_view(), name='ratings'),
     path('create-payment-intent/', views.CreatePaymentIntentView.as_view(), name='create-payment-intent'),
-    path('capture-payment-intent/', views.CapturePaymentIntentView.as_view(), name='capture-payment-intent'),
+    path('capture-payment-intent/', views.CapturePaymentView.as_view(), name='capture-payment-intent'),
+    path('create-connected-account/', views.CreateConnectedAccountView.as_view(), name='create-connected-account'),
 ]
