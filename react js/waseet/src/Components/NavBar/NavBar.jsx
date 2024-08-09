@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'
 import './NavBar.css'
 import logoImage from '../Assets/logo.png';
-import cart_icon from '../Assets/icons/icons8-cart-30.png'; 
+import heart_icon from '../Assets/icons/icons8-heart-30.png'; 
 import add_icon from '../Assets/icons/icons8-add-30.png';
 import home_icon from '../Assets/icons/icons8-home-30.png'; 
 import profile_icon from '../Assets/icons/icons8-male-user-30.png';
@@ -43,7 +43,7 @@ const NavBar = () => {
         </nav>
         <nav className='cart-button'>
         <div className="nav-cart-count">{getTotalCartItems()}</div>
-          <Link to = '/Cart'><img src={cart_icon} alt="Cart" /></Link>
+          <Link to = '/Favorites'><img src={heart_icon} alt="Favorites" /></Link>
         </nav>
    
       </div>

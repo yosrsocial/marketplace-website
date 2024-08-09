@@ -68,7 +68,7 @@ const Checkout = () => {
         </label>
       </div>
 
-      <button onClick={handleCheckout}>Proceed to Checkout</button>
+      <button onClick={handleCheckout}>Purchase</button>
     </div>
   );
 };
