@@ -148,3 +148,19 @@
 .productdisplay-right button :hover{
     background: rgba(255, 255, 255, 0.2)
 }
+
+.order-btn{
+    padding: 20px 40px;
+    margin-top: 13px;
+    margin-bottom: 20px;
+    width: 400px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: white;
+    background: #3baf06;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}

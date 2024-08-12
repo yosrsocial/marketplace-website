@@ -7,13 +7,11 @@ import {Profile} from './Pages/Profile';
 import {Product} from './Pages/Product';
 import {Cart} from './Pages/Cart';
 import {Login} from './Pages/Login';
-
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import { CheckoutPage } from './Pages/CheckoutPage';
 
 function App() {
   return (
-    <div>
+<div>
       <BrowserRouter>
       <div className='content'>
       <NavBar/>
@@ -27,10 +25,10 @@ function App() {
       <Route path="/product/:id" element={<Product />} />
       <Route path= '/Favorites' element={<Cart/>}/>
       <Route path='/Login' element={<Login/>}/>
-      <Route path='/Checkout' element={<CheckoutPage/>}/>
       </Routes>
       </BrowserRouter>
     </div>
+
   );
 }
 

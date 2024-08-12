@@ -1,10 +1,24 @@
 import React, { useContext } from 'react'
 import './ProductDisplay.css'
 import { ShopContext } from '../../Context/ShopContext';
+import Checkout from '../Checkout/Checkout.jsx'
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { useState } from 'react';
+
+const stripePromise = loadStripe('pk_test_51PfnshFE6VvobVCbL7IsaB2iDIwk1tQdOi9BlzoyPAxq0kwWGBPjMgsvwz1TCqHArvGlywGDfJgEWsovY8nJ8kob00aYeziNGx');
+
 
 export const ProductDisplay = (props) => {
     const {product} = props;
-    const {addToCart, removeFromCart, cartButtonReset, checkout} = useContext(ShopContext);
+    const {addToCart, removeFromCart, cartButtonReset} = useContext(ShopContext);
+
+    const [showCheckout, setShowCheckout] = useState(false);
+
+    const handleCheckoutClick = () => {
+        setShowCheckout(true);
+      };
+
     return (
         <div className='productdisplay'>
             <div className="productdisplay-left">
@@ -42,7 +56,12 @@ export const ProductDisplay = (props) => {
                 </div>
                         {cartButtonReset(product.id) === false && <button onClick={()=>{addToCart(product.id)}} className='add-to-cart-btn'>ADD TO FAVORITES</button>}
                         {cartButtonReset(product.id) === true && <button onClick={()=>{removeFromCart(product.id)}} className='remove-from-cart-btn'>REMOVE FROM FAVORITES</button>}
-                        <button onClick={()=>{checkout(product.id)}} className='order-btn'>PLACE AN ORDER</button>
+                        <button onClick={handleCheckoutClick} className='order-btn'>PLACE AN ORDER</button>
+
+                        {showCheckout && (
+                            <Elements stripe={stripePromise}>
+                            <Checkout amount={1000} email="customer@example.com" sellerId={1} />
+                            </Elements>)}
             </div>
         </div>
     )

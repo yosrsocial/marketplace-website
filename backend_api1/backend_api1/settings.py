@@ -29,8 +29,8 @@ SECRET_KEY = 'django-insecure-#g%*yupq8myliw76f3&(tmp8t!r1hhxktp=oj==bu+n4zkf@#&
 DEBUG = True
 
 # Stripe Keys: keep secret key secret!
-STRIPE_SECRET_KEY = 'your-stripe-secret-key'
-STRIPE_PUBLISHABLE_KEY = 'your-stripe-publishable-key'
+STRIPE_SECRET_KEY = 'sk_test_51PfnshFE6VvobVCbdj19b6gcvLEOd12IysvTAdgfRkUqx9ur6fjiz5HlVPxM9JDjtRUxskiMIbHs4YcEwFbwvwsX00sayNzu7Y'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51PfnshFE6VvobVCbL7IsaB2iDIwk1tQdOi9BlzoyPAxq0kwWGBPjMgsvwz1TCqHArvGlywGDfJgEWsovY8nJ8kob00aYeziNGx'
 
 
 

@@ -1,76 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import {Elements} from '@stripe/react-stripe-js';
 import './Checkout.css';
 
-const Checkout = () => {
-  const [deliveryMethod, setDeliveryMethod] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('');
+const Checkout = ({ amount, email, sellerId }) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [clientSecret, setClientSecret] = useState('');
 
-  const handleDeliveryChange = (option) => {
-    setDeliveryMethod(option);
-  };
+  useEffect(() => {
+    // Create PaymentIntent when the component mounts
+    fetch('http://127.0.0.1:8000/api/create-payment-intent/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ amount, email, seller_id: sellerId }),
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.client_secret));
+  }, [amount, email, sellerId]);
 
-  const handlePaymentChange = (option) => {
-    setPaymentMethod(option);
-  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const handleCheckout = () => {
-    // Implement your checkout logic here
-    console.log(`Selected Delivery Method: ${deliveryMethod}`);
-    console.log(`Selected Payment Method: ${paymentMethod}`);
-    // Add logic to navigate to the next step or complete the order
+    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    });
+
+    if (error) {
+      console.log(error);
+    } else if (paymentIntent) {
+      console.log('Payment successful:', paymentIntent);
+      // Store paymentIntent.id for later capturing
+    }
   };
 
   return (
-    <div className="checkout-container">
-      <h2>Checkout</h2>
+      <form onSubmit={handleSubmit}>
+        <CardElement />
+        <button type="submit" disabled={!stripe}>
+          Pay
+        </button>
+      </form>
 
-      <div className="section">
-        <h3>Choose Delivery Method</h3>
-        <label>
-          <input
-            type="radio"
-            value="standard"
-            checked={deliveryMethod === 'standard'}
-            onChange={() => handleDeliveryChange('standard')}
-          />
-          Standard Delivery
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="express"
-            checked={deliveryMethod === 'express'}
-            onChange={() => handleDeliveryChange('express')}
-          />
-          Express Delivery
-        </label>
-      </div>
-
-      <div className="section">
-        <h3>Choose Payment Method</h3>
-        <label>
-          <input
-            type="radio"
-            value="creditCard"
-            checked={paymentMethod === 'creditCard'}
-            onChange={() => handlePaymentChange('creditCard')}
-          />
-          Credit Card
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="paypal"
-            checked={paymentMethod === 'paypal'}
-            onChange={() => handlePaymentChange('paypal')}
-          />
-          PayPal
-        </label>
-      </div>
-
-      <button onClick={handleCheckout}>Purchase</button>
-    </div>
-  );
+    
+);
 };
 
 export default Checkout;
