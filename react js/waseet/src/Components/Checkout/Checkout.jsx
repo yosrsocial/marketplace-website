@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 import './Checkout.css';
+import api from '../api-requests'
 
 const Checkout = ({ amount, email, sellerId }) => {
   const stripe = useStripe();
@@ -10,15 +11,22 @@ const Checkout = ({ amount, email, sellerId }) => {
 
   useEffect(() => {
     // Create PaymentIntent when the component mounts
+    api.post('create-payment-intent/', JSON.stringify({ amount, email, seller_id: sellerId }), {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    /*
     fetch('http://127.0.0.1:8000/api/create-payment-intent/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ amount, email, seller_id: sellerId }),
-    })
+    })*/
       .then((res) => res.json())
       .then((data) => setClientSecret(data.client_secret));
+      console.log(clientSecret);
   }, [amount, email, sellerId]);
 
   const handleSubmit = async (event) => {
