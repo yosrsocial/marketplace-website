@@ -20,4 +20,5 @@ urlpatterns = [
     path('create-payment-intent/', views.CreatePaymentIntentView.as_view(), name='create-payment-intent'),
     path('capture-payment-intent/', views.CapturePaymentView.as_view(), name='capture-payment-intent'),
     path('create-connected-account/', views.CreateConnectedAccountView.as_view(), name='create-connected-account'),
+    path('create-account-link/', views.create_account_link, name='create_account_link'),
 ]

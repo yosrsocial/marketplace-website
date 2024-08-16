@@ -34,6 +34,25 @@ class CreateConnectedAccountView(APIView):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
 
+def create_account_link(request):
+    try:
+        # Get the Stripe Account ID from the request body
+        account_id = request.POST.get('stripe_account_id')
+
+        # Generate the account link for onboarding
+        account_link = stripe.AccountLink.create(
+            account=account_id,
+            refresh_url='http://localhost:3000/reauth',
+            return_url='http://localhost:3000/onboarding-complete',
+            type='account_onboarding',
+        )
+
+        # Return the account link URL
+        return JsonResponse({'url': account_link.url})
+    
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=400)
+
 class CreatePaymentIntentView(APIView):
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
