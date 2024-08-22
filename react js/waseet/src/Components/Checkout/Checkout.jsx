@@ -4,14 +4,14 @@ import {Elements} from '@stripe/react-stripe-js';
 import './Checkout.css';
 import api from '../api-requests'
 
-const Checkout = ({ amount, email, sellerId }) => {
+const Checkout = ({ amount, email, sellername }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
     // Create PaymentIntent when the component mounts
-    api.post('create-payment-intent/', JSON.stringify({ amount, email, seller_id: sellerId }), {
+    api.post('create-payment-intent/', JSON.stringify({ amount, email, seller_name: sellername }), {
       headers: {
         'Content-Type': 'application/json',
       },

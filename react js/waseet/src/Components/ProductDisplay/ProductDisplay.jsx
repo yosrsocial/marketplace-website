@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import './ProductDisplay.css'
 import { ShopContext } from '../../Context/ShopContext';
 import Checkout from '../Checkout/Checkout.jsx'
-import { Elements } from '@stripe/react-stripe-js';
+import { Elements, CardElement, useElements} from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { useState } from 'react';
 
@@ -12,9 +12,10 @@ const stripePromise = loadStripe('pk_test_51PfnshFE6VvobVCbL7IsaB2iDIwk1tQdOi9Bl
 export const ProductDisplay = (props) => {
     const {product} = props;
     const {addToCart, removeFromCart, cartButtonReset} = useContext(ShopContext);
+    const amountint = Math.round(product.price)
+
 
     const [showCheckout, setShowCheckout] = useState(false);
-
     const handleCheckoutClick = () => {
         setShowCheckout(true);
       };
@@ -60,7 +61,10 @@ export const ProductDisplay = (props) => {
 
                         {showCheckout && (
                             <Elements stripe={stripePromise}>
-                            <Checkout amount={product.price} email={'user123@example.com'} sellerId={1} />
+                            <Checkout amount={amountint}
+                            email={'user123@example.com'}
+                            sellername={product.seller}
+                            payment_method = {'card'} />
                             </Elements>)}
             </div>
         </div>

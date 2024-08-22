@@ -26,7 +26,7 @@ class CreateConnectedAccountView(APIView):
                 type='express',
             )
             # Store the account.id in database associated with the seller
-            seller = request.user.Seller
+            seller = request.User.Seller
             seller.stripe_account_id = account.id
             seller.save()
 
@@ -57,11 +57,12 @@ class CreatePaymentIntentView(APIView):
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
         amount = data.get('amount')
-        seller_id = data.get('seller_id')  # Assuming the frontend sends the seller's ID
+        seller_name = data.get('seller_name')  # Assuming the frontend sends the seller's ID
 
         try:
             # Fetch the seller's Stripe account ID
-            seller = models.Seller.objects.get(id=seller_id)
+            seller = models.Seller.objects.get(user__username =seller_name)
+
             stripe_account_id = seller.stripe_account_id
 
             # Create the PaymentIntent
