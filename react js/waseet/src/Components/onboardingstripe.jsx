@@ -1,7 +1,8 @@
 import React from 'react'
 import './onboardingstripe.css'
+import api from '../Components/api-requests.jsx'
 
-export const onboardingstripe=()=> {
+export const Onboardingstripe=()=> {
     async function getAccountLink(stripeAccountId) {
         try {
             const response = api.post('/create-account-link/', {

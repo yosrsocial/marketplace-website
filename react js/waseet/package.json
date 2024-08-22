@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@stripe/react-connect-js": "^3.3.13",
     "@stripe/react-stripe-js": "^2.7.3",
     "@stripe/stripe-js": "^4.2.0",
     "@testing-library/jest-dom": "^5.17.0",
