@@ -60,7 +60,7 @@ export const ProductDisplay = (props) => {
 
                         {showCheckout && (
                             <Elements stripe={stripePromise}>
-                            <Checkout amount={1000} email={'user123@example.com'} sellerId={1} />
+                            <Checkout amount={product.price} email={'user123@example.com'} sellerId={1} />
                             </Elements>)}
             </div>
         </div>

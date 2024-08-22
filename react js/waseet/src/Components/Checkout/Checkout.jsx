@@ -26,7 +26,7 @@ const Checkout = ({ amount, email, sellerId }) => {
     })*/
       .then((res) => res.json())
       .then((data) => setClientSecret(data.client_secret));
-      console.log(clientSecret);
+      console.log('client:', clientSecret);
   }, [amount, email, sellerId]);
 
   const handleSubmit = async (event) => {

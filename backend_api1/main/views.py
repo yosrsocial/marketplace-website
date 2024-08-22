@@ -76,8 +76,8 @@ class CreatePaymentIntentView(APIView):
                 },
                 capture_method='manual',  # Optional: Capture the payment later
             )
-
-            return JsonResponse({'client_secret': payment_intent['client_secret']})
+            client_secret = payment_intent['client_secret']
+            return JsonResponse({'client_secret': client_secret})
 
         except models.Seller.DoesNotExist:
             return JsonResponse({'error': 'Seller not found'}, status=404)

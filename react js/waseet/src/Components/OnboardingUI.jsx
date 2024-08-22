@@ -1,7 +1,7 @@
 import React from "react";
 import { ConnectAccountOnboarding, ConnectComponentsProvider } from "@stripe/react-connect-js";
 
-const AccountOnboardingUI = () => {
+export const OnboardingUI = () => {
 
   const handleOnboardingSuccess = async (stripeAccountId) => {
     console.log("Onboarding completed with Stripe Account ID:", stripeAccountId);
@@ -46,5 +46,3 @@ const AccountOnboardingUI = () => {
     </ConnectComponentsProvider>
   );
 }
-
-export default AccountOnboardingUI;
