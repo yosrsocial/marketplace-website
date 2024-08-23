@@ -17,6 +17,7 @@ export const ProductDisplay = (props) => {
 
     const [showCheckout, setShowCheckout] = useState(false);
     const handleCheckoutClick = () => {
+        
         setShowCheckout(true);
       };
 

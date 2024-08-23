@@ -57,7 +57,7 @@ class CreatePaymentIntentView(APIView):
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
         amount = data.get('amount')
-        seller_name = data.get('seller_name')  # Assuming the frontend sends the seller's ID
+        seller_name = data.get('sellername')  # Assuming the frontend sends the seller's ID
 
         try:
             # Fetch the seller's Stripe account ID
@@ -69,8 +69,9 @@ class CreatePaymentIntentView(APIView):
             payment_intent = stripe.PaymentIntent.create(
                 amount=amount,
                 currency= 'usd',
-                payment_method_types= ['card'],
-                confirmation_method='manual',
+                payment_method_types= {'card':  {"capture_method": "manual"}},
+                payment_method = 'pm_card_visa',
+                confirmation_method='automatic',
                 confirm=True,
                 transfer_data={
                     'destination': stripe_account_id,  # Seller's Stripe account ID
