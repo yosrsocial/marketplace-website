@@ -4,7 +4,7 @@ import {Elements} from '@stripe/react-stripe-js';
 import './Checkout.css';
 import api from '../api-requests'
 
-const Checkout = ({ amount, email, sellername }) => {
+const Checkout = ({ amount, email, sellername}) => {
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState('');
@@ -35,7 +35,7 @@ const Checkout = ({ amount, email, sellername }) => {
     if (error) {
       console.log(error);
     } else  if (result.paymentIntent.status === "requires_capture") {
-
+      setOrderButton(true)
     }
   };
 

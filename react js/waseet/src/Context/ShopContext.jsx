@@ -10,6 +10,7 @@ const ShopContextProvider = (props) => {
     const [data, setData] = useState([]);
     const [cartItems, setCartItems] = useState();
     const [cartButtononClickStatus, setCartButtononClickStatus] = useState(false);
+    
 
     const cartButtonReset = (itemId) => {
         if(cartButtononClickStatus && cartItems[itemId] == 0){
