@@ -13,9 +13,6 @@ export const ProductDisplay = (props) => {
     const {product} = props;
     const {addToCart, removeFromCart, cartButtonReset} = useContext(ShopContext);
     const amountint = Math.round(product.price)
-    const orderButton = Checkout.
-
-
     const [showCheckout, setShowCheckout] = useState(false);
     const handleCheckoutClick = () => {
 

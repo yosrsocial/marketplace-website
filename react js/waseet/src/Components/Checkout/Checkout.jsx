@@ -8,7 +8,7 @@ const Checkout = ({ amount, email, sellername}) => {
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState('');
-  const [orderButton, setOrderButton] = useState(false);
+  const [orderStatus, setOrderStatus] = useState(false);
 
   useEffect(() => {
     // Create PaymentIntent when the component mounts
@@ -35,7 +35,8 @@ const Checkout = ({ amount, email, sellername}) => {
     if (error) {
       console.log(error);
     } else  if (result.paymentIntent.status === "requires_capture") {
-      setOrderButton(true)
+      setOrderStatus(true)
+      console.log('Order successful!!!!!!!!!!')
     }
   };
 

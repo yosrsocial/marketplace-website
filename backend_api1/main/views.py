@@ -18,6 +18,7 @@ import stripe
 import json
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+logger = logging.getLogger(__name__)
 
 class CreateConnectedAccountView(APIView):
     def post(self, request, *args, **kwargs):
@@ -69,7 +70,7 @@ class CreatePaymentIntentView(APIView):
             payment_intent = stripe.PaymentIntent.create(
                 amount=amount,
                 currency= 'usd',
-                payment_method_types= {'card':  {"capture_method": "manual"}},
+                payment_method_types= ['card'],
                 payment_method = 'pm_card_visa',
                 confirmation_method='automatic',
                 confirm=True,
@@ -78,6 +79,7 @@ class CreatePaymentIntentView(APIView):
                 },
                 capture_method='manual',  # Optional: Capture the payment later
             )
+            logger.info(f'Created PaymentIntent: {payment_intent.id}')
             client_secret = payment_intent['client_secret']
             return JsonResponse({'client_secret': client_secret})
 
@@ -85,6 +87,16 @@ class CreatePaymentIntentView(APIView):
             return JsonResponse({'error': 'Seller not found'}, status=404)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
+        
+def cancelPaymentIntent(payment_intent_id):
+    try:
+        # Cancel the PaymentIntent
+        canceled_payment_intent = stripe.PaymentIntent.cancel(payment_intent_id)
+        
+        return JsonResponse({'status': 'PaymentIntent canceled successfully'})
+    
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
 
 
 class CapturePaymentView(APIView):
