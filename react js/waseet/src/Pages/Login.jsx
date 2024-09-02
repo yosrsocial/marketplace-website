@@ -57,7 +57,7 @@ export const Login = () => {
     const handleLoginSuccess = () => {
       if (login_success()) {
         console.log("Login successful!");
-        //window.location.href = '/'; // Redirect to homepage
+        window.location.href = 'Home/'; // Redirect to homepage
       } else {
         console.error("Login failed or token is missing/invalid.");
       }

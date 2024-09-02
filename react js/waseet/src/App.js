@@ -19,13 +19,13 @@ function App() {
 
       </div>
       <Routes>
-      <Route path='/' element={<Home/>}/>
+      <Route path='/' element={<Login/>}/>
       <Route path='/Profile' element={<Profile/>}/>
       <Route path='/AddListing' element={<SellItem/>}/>
       <Route path='/Product' element={<Product/>}/>
       <Route path="/product/:id" element={<Product />} />
       <Route path= '/Favorites' element={<Cart/>}/>
-      <Route path='/Login' element={<Login/>}/>
+      <Route path='/Home' element={<Home/>}/>
       <Route path='/Onboarding' element={<Onboarding/>}/>
       </Routes>
       </BrowserRouter>

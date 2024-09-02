@@ -33,13 +33,10 @@ const NavBar = () => {
       </nav>
       <div className="action-buttons">
       <nav className='home-button'>
-          <Link to = '/'><img src={home_icon} alt="waseet" /></Link>
+          <Link to = 'Home/'><img src={home_icon} alt="waseet" /></Link>
       </nav>
         <nav className="sell-button">
         <a href ='/AddListing' className='custom-button'><img src={add_icon} alt="" /></a> 
-        </nav>
-        <nav className="login-button">
-          <a href ='/Login' className='custom-button'> <img src={profile_icon} alt="" /></a>
         </nav>
         <nav className='cart-button'>
         <div className="nav-cart-count">{getTotalCartItems()}</div>
