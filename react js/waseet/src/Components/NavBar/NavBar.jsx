@@ -3,8 +3,8 @@ import './NavBar.css'
 import logoImage from '../Assets/logo.png';
 import heart_icon from '../Assets/icons/icons8-heart-30.png'; 
 import add_icon from '../Assets/icons/icons8-add-30.png';
-import home_icon from '../Assets/icons/icons8-home-30.png'; 
-import profile_icon from '../Assets/icons/icons8-male-user-30.png';
+import logout_icon from '../Assets/icons/icons8-logout-30.png'; 
+import home_icon from '../Assets/icons/icons8-home-30.png';
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
 import search_icon from '../Assets/icons8-search-20.png';
@@ -41,6 +41,9 @@ const NavBar = () => {
         <nav className='cart-button'>
         <div className="nav-cart-count">{getTotalCartItems()}</div>
           <Link to = '/Favorites'><img src={heart_icon} alt="Favorites" /></Link>
+        </nav>
+        <nav className='logout-button'>
+        <Link to = 'Logout/'><img src={logout_icon} alt="Logout" /></Link>
         </nav>
    
       </div>

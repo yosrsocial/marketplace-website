@@ -7,6 +7,7 @@ import {Profile} from './Pages/Profile';
 import {Product} from './Pages/Product';
 import {Cart} from './Pages/Cart';
 import {Login} from './Pages/Login';
+import {Logout} from './Pages/Logout.jsx'
 import {Onboarding} from './Pages/onboarding.jsx';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
@@ -27,6 +28,7 @@ function App() {
       <Route path= '/Favorites' element={<Cart/>}/>
       <Route path='/Home' element={<Home/>}/>
       <Route path='/Onboarding' element={<Onboarding/>}/>
+      <Route path='/Logout' element={<Logout/>}/>
       </Routes>
       </BrowserRouter>
     </div>

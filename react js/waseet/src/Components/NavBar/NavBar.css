@@ -73,11 +73,13 @@ width:90px;
 }
 
 .action-buttons{
+  position: relative;
+  height: 400px;
   margin-left: 20px;
 }
 
 .home-button{
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 }
 
 .sell-button {
@@ -120,6 +122,11 @@ width:90px;
   display: inline;
 }
 
+.logout-button{
+  position: absolute;
+  bottom: 0;
+}
+
 .nav-cart-count {
   width: 15px;
   height: 18px;
@@ -130,3 +137,4 @@ width:90px;
   background-color: rgb(219, 103, 103);
   color: white;
 }
+
