@@ -22,11 +22,6 @@ export const ProfileBar = () => {
       <h1>My Orders</h1>
     </div>
     <hr />
-
-    <hr />
-    <div className="logout">
-      <h1>Logout</h1>
-    </div>
   </div>
 </div>
   )
