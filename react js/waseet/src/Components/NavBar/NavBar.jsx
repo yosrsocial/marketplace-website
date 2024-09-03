@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import './NavBar.css'
-import logoImage from '../Assets/logo.png';
+import logoImage from '../Assets/icons/logo.png';
 import heart_icon from '../Assets/icons/icons8-heart-30.png'; 
 import add_icon from '../Assets/icons/icons8-add-30.png';
 import logout_icon from '../Assets/icons/icons8-logout-30.png'; 
@@ -28,7 +28,7 @@ const NavBar = () => {
       <img src={logoImage} alt="" />
       </nav>
       <nav className="logo-name">
-        <p>Bi3ly</p>
+        <p>MARKETIO</p>
       </nav>
       </nav>
       <div className="action-buttons">
