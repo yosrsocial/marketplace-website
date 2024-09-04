@@ -127,6 +127,10 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = serializers.userserializer
 
+class SellerView(generics.ListCreateAPIView):
+    queryset = models.Seller.objects.all
+    serializer_class = serializers.sellerserializer
+
 @method_decorator(csrf_exempt, name='dispatch')
 class UserLoginView(APIView):
     def post(self, request):

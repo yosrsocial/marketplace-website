@@ -44,6 +44,9 @@ class ProductRetrieveSerializer(serializers.ModelSerializer):
     def get_product_seller(self, obj):
         return obj.seller.username if obj.seller else None
 
+class sellerserializer(serializers.ModelSerializer):
+    model = models.Seller
+    fields = '__all__'
 
 class productcreationserializer(serializers.ModelSerializer):
     product_images = ProductImageCreateSerializer(many=True)
