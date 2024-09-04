@@ -10,6 +10,11 @@
     border-left: solid 2px #fafafa;
 }
 
+.user{
+    display: flex;
+    align-items: flex-start;
+}
+
 .profile-picture img{
     margin: 20px;
     height: 40px;
