@@ -13,6 +13,13 @@
 .user-info{
     display: flex;
     align-items: flex-start;
+    align-items: center;
+}
+
+.balance{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
 }
 
 .profile-picture img{
