@@ -6,11 +6,13 @@ export const ProfileBar = () => {
   return (
 <div className='profilebar'>
   <div className="user">
+    <div className="user-info">
     <div className="profile-picture">
     <img src={profilePicture} alt="" />
     </div>
     <div className="username">
       <h1>User</h1>
+    </div>
     </div>
     <hr />
     <div className="balance">

@@ -10,7 +10,7 @@
     border-left: solid 2px #fafafa;
 }
 
-.user{
+.user-info{
     display: flex;
     align-items: flex-start;
 }
