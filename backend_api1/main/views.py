@@ -128,7 +128,7 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.userserializer
 
 class SellerView(generics.ListCreateAPIView):
-    queryset = models.Seller.objects.all
+    queryset = models.Seller.objects.all()
     serializer_class = serializers.sellerserializer
     permission_classes = [permissions.IsAuthenticated]
 
