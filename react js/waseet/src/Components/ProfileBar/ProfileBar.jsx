@@ -14,10 +14,10 @@ export const ProfileBar = () => {
       try {
         try {
           const response = await api.get('/sellers/');
-          //console.log('response:', response)
+          console.log('response:', response)
           setData(response.data);
         } catch (error) {
-          console.error(error); // Handle errors
+          console.error('DATAAAAAAAAA', error); // Handle errors
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -30,6 +30,10 @@ export const ProfileBar = () => {
 
   return (
 <div className='profilebar'>
+<div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
   <div className="user">
     <div className="user-info">
     <div className="profile-picture">
@@ -50,6 +54,8 @@ export const ProfileBar = () => {
     </div>
     <hr />
   </div>
+      )}
+      </div>
 </div>
   )
 }

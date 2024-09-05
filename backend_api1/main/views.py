@@ -130,6 +130,7 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
 class SellerView(generics.ListCreateAPIView):
     queryset = models.Seller.objects.all
     serializer_class = serializers.sellerserializer
+    permission_classes = [permissions.IsAuthenticated]
 
 @method_decorator(csrf_exempt, name='dispatch')
 class UserLoginView(APIView):
