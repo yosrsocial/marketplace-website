@@ -2,9 +2,12 @@ import React from 'react'
 import './ProfileBar.css'
 import profilePicture from '../Assets/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg'
 import api from '../api-requests'
-import { useEffect } from 'react'
+import { useEffect,  useState } from 'react'
 
 export const ProfileBar = () => {
+
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +33,7 @@ export const ProfileBar = () => {
   <div className="user">
     <div className="user-info">
     <div className="profile-picture">
-    <img src={profilePicture} alt="" />
+    <img src={data.profile_picture} alt="" />
     </div>
     <div className="username">
       <h1>User</h1>
