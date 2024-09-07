@@ -3,8 +3,11 @@
 }
 
 .top{
+  display: flex;
+  flex-direction: row;
   right: 0;
   position: fixed;
+  height: 70px;
   margin-bottom: 200px;
   background-color: #fff;
   box-shadow: 0px 2px 30px 0px rgba(0,0,0,0.03);
@@ -12,24 +15,25 @@
 -moz-box-shadow: 0px 2px 30px 0px rgba(0,0,0,0.03);
 }
 
+.nav-logo {
+  text-decoration: none;
+  font-size: 20px;
+  color: #6d4ca1;
+  size: 100%;
+}
+
 
 .sidebar{
 position: fixed;
 background-color: #8EC5FC;
-background-image: linear-gradient(183deg, rgb(55.686% 77.255% 98.824%) 0%, rgb(55.726% 77.264% 98.812%) 6.25%, rgb(56.002% 77.324% 98.728%) 12.5%, rgb(56.744% 77.487% 98.502%) 18.75%, rgb(58.153% 77.803% 98.06%) 25%, rgb(60.385% 78.322% 97.324%) 31.25%, rgb(63.531% 79.086% 96.213%) 37.5%, rgb(67.612% 80.137% 94.633%) 43.75%, rgb(72.593% 81.509% 92.475%) 50%, rgb(77.164% 82.851% 90.248%) 56.25%, rgb(80.379% 83.841% 88.526%) 62.5%, rgb(82.583% 84.541% 87.264%) 68.75%, rgb(84.018% 85.006% 86.404%) 75%, rgb(84.873% 85.286% 85.877%) 81.25%, rgb(85.308% 85.43% 85.605%) 87.5%, rgb(85.467% 85.483% 85.505%) 93.75%, rgb(85.49% 85.49% 85.49%) 100% );
-height: 100%;
+  background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+height: 85%;
+margin-top: 80px;
 padding: 10px;
 width:90px;
+border-radius: 30px;
 }
 
-.nav-logo {
-  color: white;
-  text-decoration: none;
-  font-size: 20px;
-  padding: 5px;
-  margin-top: 20px;
-  margin-bottom: 70px;
-}
 
 .logo-name{
 
@@ -40,9 +44,7 @@ width:90px;
 }
 
 .nav-logo img{
-  margin-top: 0px;
   height: 10%;
-  margin-bottom: 10px;
 }
 
 .search{
@@ -77,12 +79,13 @@ width:90px;
 
 .action-buttons{
   position: relative;
-  height: 400px;
+  height: 480px;
+  margin-top: 30px;
   margin-left: 20px;
 }
 
 .home-button{
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 
 .sell-button {
@@ -92,7 +95,7 @@ width:90px;
   border: none;
   outline: none;
   padding: 0;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   background: transparent;
   cursor: pointer;
 }
@@ -128,6 +131,7 @@ width:90px;
 .logout-button{
   position: absolute;
   bottom: 0;
+  
 }
 
 .nav-cart-count {

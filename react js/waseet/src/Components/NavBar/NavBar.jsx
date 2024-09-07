@@ -23,14 +23,14 @@ const NavBar = () => {
       </nav>
       </nav>
       <nav className='sidebar'>
-      <nav className='nav-logo'>
-      <nav className='logo-img'>
+        {/*<nav className='nav-logo'>
+        <nav className='logo-img'>
       <img src={logoImage} alt="" />
       </nav>
       <nav className="logo-name">
         <p>MARKETIO</p>
-      </nav>
-      </nav>
+      </nav> 
+      </nav>*/}
       <div className="action-buttons">
       <nav className='home-button'>
           <Link to = 'Home/'><img src={home_icon} alt="waseet" /></Link>

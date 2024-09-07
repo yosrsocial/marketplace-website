@@ -67,7 +67,7 @@ const handleSubmit = (e) => {
     <div className='key-information'>
         <div className="key-information-container">
             <form onSubmit={handleSubmit}>
-                <h2>Add Listing</h2>
+                <h2>Add Product</h2>
                 <label>
                 Title:
                 <input
