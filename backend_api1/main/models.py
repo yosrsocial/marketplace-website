@@ -24,6 +24,7 @@ class products(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.ForeignKey(productcategory, on_delete=models.SET_NULL, null=True)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product_images/', null=True, blank=True)
     quantity = models.PositiveIntegerField(default=1)
     size = models.CharField(max_length=20, blank=True, null=True)
     color = models.CharField(max_length=20, blank=True, null=True)
@@ -39,10 +40,6 @@ class products(models.Model):
         if ratings:
             return sum(rating.rating_value for rating in ratings) / len(ratings)
         return 0 
-
-class productimages(models.Model):
-    image = models.ImageField(upload_to='product_images/', null=True, blank=True)
-    product = models.ForeignKey(products, on_delete=models.SET_NULL, null=True, related_name= 'product_images')
 
 
 class saved(models.Model):

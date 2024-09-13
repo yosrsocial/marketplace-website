@@ -12,7 +12,7 @@ class ProductImageDetailSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField('get_image_url')
 
     class Meta:
-        model = models.productimages
+        model = models.products
         fields = '__all__' 
 
     def get_image_url(self, obj):
@@ -22,7 +22,7 @@ class ProductImageDetailSerializer(serializers.ModelSerializer):
 class ProductImageCreateSerializer(serializers.ModelSerializer):
     image = serializers.ListSerializer(child=serializers.FileField(required=False))
     class Meta:
-        model = models.productimages
+        model = models.products
         fields = ['image']
         
 class ProductRetrieveSerializer(serializers.ModelSerializer):

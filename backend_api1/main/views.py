@@ -166,7 +166,7 @@ class productlist(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
 class productimages(generics.ListCreateAPIView):
-    queryset= models.productimages.objects.all()
+    queryset= models.products.objects.all()
     serializer_class = serializers.ProductImageDetailSerializer
     permission_classes = [permissions.IsAuthenticated]
 
