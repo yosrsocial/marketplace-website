@@ -62,7 +62,20 @@ export const ProfileBar = () => {
           {data ? (
             <p>data available</p>
           ):(
-            <p>No data available yet</p>
+            <div className="userpic">
+              <div className="profile-picture">
+                <img src={profilePicture} alt="profile picture" />
+              </div>
+              <div className="username">
+                <h1>User</h1>
+              </div>
+              <hr />
+              <div className="balance">
+                <h1>Balance</h1>
+                <p>0.00</p>
+              </div>
+              <hr />
+            </div>
           )}
         </div>
       )}
