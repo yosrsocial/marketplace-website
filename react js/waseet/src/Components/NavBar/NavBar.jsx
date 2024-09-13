@@ -17,6 +17,9 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <nav className='top'>
+        <nav className='logo'>
+          <img src={logoImage} alt="M" />
+        </nav>
       <nav className="search">
         <img src={search_icon} alt="" />
         <input type="text" className = 'search-input' placeholder='Search'/>
