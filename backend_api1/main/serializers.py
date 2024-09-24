@@ -31,7 +31,7 @@ class ProductRetrieveSerializer(serializers.ModelSerializer):
     seller = serializers.SerializerMethodField('get_product_seller')
     class Meta:
         model = models.products
-        fields = ['id', 'category', 'image',  'title', 'seller', 'price', 'description', 'quantity', 'size', 'color', 'is_sold', 'created_at', 'product_images']
+        fields = '__all__'
 
     '''def get_product_images(self, obj):
         images = models.productimages.objects.filter(product=obj)

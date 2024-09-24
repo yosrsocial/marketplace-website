@@ -24,8 +24,8 @@ export const Item = (props) => {
 
     <div className= 'item'>
         <div className="image">
-        <Link to={`/product/${props.id}`}>{props.product_images.length > 0 && ( 
-          <img className="item-img" key={0} src={props.product_images[0].image_url} onClick={() => window.scrollTo(0, 0)} />)}
+        <Link to={`/product/${props.id}`}>{props.image.length > 0 && ( 
+          <img className="item-img" key={0} src={props.image} onClick={() => window.scrollTo(0, 0)} />)}
         </Link>
         </div>
         <div className="titlenprice">

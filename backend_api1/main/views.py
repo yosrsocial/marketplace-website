@@ -208,7 +208,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     # Handle uploaded images
         image = request.FILES.getlist('image')
         #product_view_logger.debug("Uploaded Images: %s", request.FILES.getlist('product_images'))
-        for image in product_images:
+        for image in product:
             image = models.products(product=product, image=image)
             image.save()
 
