@@ -158,8 +158,6 @@ class UserLoginView(APIView):
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
 
-
-
 class productlist(generics.ListCreateAPIView):
     queryset= models.products.objects.all()
     serializer_class = serializers.ProductRetrieveSerializer
@@ -208,11 +206,11 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         product = serializer.save()
     # Handle uploaded images
-        product_images = request.FILES.getlist('product_images')
+        image = request.FILES.getlist('image')
         #product_view_logger.debug("Uploaded Images: %s", request.FILES.getlist('product_images'))
         for image in product_images:
-            product_images = models.productimages(product=product, image=image)
-            product_images.save()
+            image = models.products(product=product, image=image)
+            image.save()
 
         return Response(serializer.data)
 
