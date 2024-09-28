@@ -19,12 +19,9 @@ export const ProductDisplay = (props) => {
         setShowCheckout(true);
       };
     
-
-    return (
-        <div className='productdisplay'>
-            <div className="productdisplay-left">
-                <div className="productdisplay-img-list">
-                    {product.product_images
+      /* 
+                      <div className="productdisplay-img-list">
+                    {product.image
                     // Filter out the image at index 0
                     .filter((_, index) => index !== 0)
                     // Map over the filtered array to render images
@@ -37,9 +34,13 @@ export const ProductDisplay = (props) => {
                     />
                     ))}
                 </div>
+      */
+
+    return (
+        <div className='productdisplay'>
+            <div className="productdisplay-left">
                 <div className="productdisplay-img">
-                    {product.product_images.map((image_url, index)=>(index === 0 && (
-                    <img className='productdisplay-main-img' src={image_url} alt="" />)))}
+                    <img className='productdisplay-main-img' src={product.image} alt="" />
                 </div>
             </div>
             <div className="productdisplay-right">

@@ -48,7 +48,7 @@ export const New = () => {
           title={item.title}
           price={item.price}
           seller={item.seller}
-          product_images={item.product_images}
+          image={item.image}
         />
       ))
     ) : (

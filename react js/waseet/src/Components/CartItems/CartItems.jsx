@@ -25,8 +25,7 @@ const CartItem = () => {
                 return (
                 <div>
                 <div className="cartitems-format cartitems-format-main">
-                    {product.product_images.map((image_url, index)=>(index === 0 && (
-                    <img src={image_url} alt="" className='carticon-product-icon' />)))}
+                    <img src={product.image} alt="" className='carticon-product-icon' />
                     <p>{product.title}</p>
                     <p>{product.price} DA</p>
                     <button className='cartitems-quantity'>{quantity}</button>
