@@ -39,35 +39,6 @@ const CartItem = () => {
 
             return null;
         })}
-        <div className="cartitems-down">
-            <div className="cartitems-total">
-                <h1>cart totals</h1>
-                <div>
-                    <div className="cartitems-total-item">
-                    <p>Subtotal</p>
-                    <p>{getTotalCartAmount()} DA</p>
-                    </div>
-                    <hr />
-                    <div className="cartitems-total-item">
-                    <p>shipping fee</p>
-                    <p>Free</p>
-                    </div>
-                    <hr />
-                    <div className="cartitems-total-item">
-                    <h3>Total</h3>
-                    <h3>{getTotalCartAmount()} DA</h3>
-                    </div>
-                </div>
-                <a href ='/Checkout' className='custom-button'>Proceed To Checkout</a>
-            </div>
-            <div className="cartitems-promocode">
-                <p>if you have a promocode enter it here</p>
-                <div className="cartitems-promobox">
-                    <input type="text" placeholder='promo code'/>
-                    <button>Submit</button>
-                </div>
-        </div>
-        </div>
 
     </div>
     )
