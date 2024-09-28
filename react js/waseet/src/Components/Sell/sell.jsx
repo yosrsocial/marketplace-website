@@ -34,14 +34,14 @@ const SellItem = () => {
   };
 
     // Handle image file selection
-    const handleImageChange = (event) => {
+  /*  const handleImageChange = (event) => {
       const selectedFiles = event.target.files;
       console.log(selectedFiles)
       for (let i = 0; i < selectedFiles.length; i++) {
         formData.append('product_images', selectedFiles[i]);
       }
     };
-
+*/
   // Handle form submission
 const handleSubmit = (e) => {
   for (var pair of formData.entries()) {
@@ -144,15 +144,13 @@ const handleSubmit = (e) => {
                   <input
                   className='image-input'
                   type="file"
-                  name="product_images"
-                  value={formData.product_images}
-                  accept="image/*"
-                  multiple
-                  onChange={handleImageChange}
+                  name="image"
+                  value={formData.image}
+                  onChange={handleInputChange}
                         />
                 </label>
                 <br />
-                <input type="hidden" name="seller" value={username} />
+                <input type="hidden" name="seller" value={username} onChange={handleInputChange} />
                 <br />
                 <button type="submit">Submit</button>
 
